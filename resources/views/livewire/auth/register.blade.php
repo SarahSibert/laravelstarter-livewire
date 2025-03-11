@@ -6,7 +6,7 @@
 
     <form wire:submit="register" class="flex flex-col gap-6">
         <!-- Name -->
-        <flux:input
+        <x-input
             wire:model="name"
             id="name"
             :label="__('Name')"
@@ -19,7 +19,7 @@
         />
 
         <!-- Email Address -->
-        <flux:input
+        <x-input
             wire:model="email"
             id="email"
             :label="__('Email address')"
@@ -31,7 +31,7 @@
         />
 
         <!-- Password -->
-        <flux:input
+        <x-input
             wire:model="password"
             id="password"
             :label="__('Password')"
@@ -43,7 +43,7 @@
         />
 
         <!-- Confirm Password -->
-        <flux:input
+        <x-input
             wire:model="password_confirmation"
             id="password_confirmation"
             :label="__('Confirm password')"
@@ -55,14 +55,14 @@
         />
 
         <div class="flex items-center justify-end">
-            <flux:button type="submit" variant="primary" class="w-full">
+            <x-button type="submit" variant="primary" class="w-full">
                 {{ __('Create account') }}
-            </flux:button>
+            </x-button>
         </div>
     </form>
 
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
         Already have an account?
-        <flux:link :href="route('login')" wire:navigate>Log in</flux:link>
+        <a href="{{ route('login') }}" wire:navigate>Log in</a>
     </div>
 </div>

@@ -9,7 +9,7 @@
 
     <form wire:submit="confirmPassword" class="flex flex-col gap-6">
         <!-- Password -->
-        <flux:input
+        <x-input
             wire:model="password"
             id="password"
             :label="__('Password')"
@@ -20,6 +20,6 @@
             placeholder="Password"
         />
 
-        <flux:button variant="primary" type="submit" class="w-full">{{ __('Confirm') }}</flux:button>
+        <x-button variant="primary" type="submit" class="w-full">{{ __('Confirm') }}</x-button>
     </form>
 </div>

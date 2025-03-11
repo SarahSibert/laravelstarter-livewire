@@ -6,7 +6,7 @@
 
     <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
         <!-- Email Address -->
-        <flux:input
+        <x-input
             wire:model="email"
             :label="__('Email Address')"
             type="email"
@@ -16,11 +16,11 @@
             placeholder="email@example.com"
         />
 
-        <flux:button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</flux:button>
+        <x-button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</x-button>
     </form>
 
     <div class="space-x-1 text-center text-sm text-zinc-400">
         Or, return to
-        <flux:link :href="route('login')" wire:navigate>log in</flux:link>
+        <a href="{{ route('login') }}" wire:navigate>log in</a>
     </div>
 </div>
