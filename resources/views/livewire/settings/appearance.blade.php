@@ -38,33 +38,38 @@
         </div>
         
         <script>
-        function themeSwitcher() {
-            return {
-                theme: 'light',
-                setTheme(mode) {
-                    this.theme = mode;
-                    localStorage.setItem('theme', mode);
-        
-                    if (mode === 'dark') {
-                        document.documentElement.classList.add('dark');
-                    } else if (mode === 'light') {
-                        document.documentElement.classList.remove('dark');
-                    } else {
-                        // System mode (follow user OS preference)
-                        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            function themeSwitcher() {
+                return {
+                    theme: localStorage.getItem('theme') || 'system',
+                    
+                    setTheme(mode) {
+                        this.theme = mode;
+                        localStorage.setItem('theme', mode);
+            
+                        // Remove any existing theme class
+                        document.documentElement.classList.remove('dark', 'light');
+            
+                        if (mode === 'dark') {
                             document.documentElement.classList.add('dark');
+                        } else if (mode === 'light') {
+                            document.documentElement.classList.add('light');
                         } else {
-                            document.documentElement.classList.remove('dark');
+                            // System mode (follow user OS preference)
+                            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                                document.documentElement.classList.add('dark');
+                            } else {
+                                document.documentElement.classList.add('light');
+                            }
                         }
+                    },
+            
+                    loadTheme() {
+                        let savedTheme = localStorage.getItem('theme') || 'system';
+                        this.setTheme(savedTheme);
                     }
-                },
-                loadTheme() {
-                    let savedTheme = localStorage.getItem('theme') || 'system';
-                    this.setTheme(savedTheme);
-                }
-            };
-        }
-        </script>
+                };
+            }
+            </script>
           
     </x-settings.layout>
 </div>

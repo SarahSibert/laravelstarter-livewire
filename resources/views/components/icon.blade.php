@@ -1,6 +1,6 @@
 @props([
     'name',
-    'size' => '5', // Default size is 5
+    'size' => '5', // Default size
     'class' => '' // Allow additional classes
 ])
 

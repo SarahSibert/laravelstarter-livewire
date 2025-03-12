@@ -1,4 +1,4 @@
-<div class="flex items-start max-md:flex-col">
+<div class="flex items-start max-md:flex-col dark:text-white/80">
     <div class="mr-10 w-full pb-4 md:w-[220px]">
         <x-navlist>
             <x-navlink :href="route('settings.profile')" wire:navigate>{{ __('Profile') }}</x-navlink>
