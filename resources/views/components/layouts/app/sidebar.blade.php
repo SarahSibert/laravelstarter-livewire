@@ -3,8 +3,7 @@
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800 flex space-x-8" x-data="{ sidebarOpen: false, userMenuOpen: false }">
-    
+    <body class="min-h-screen bg-white dark:bg-zinc-800 flex space-x-8" x-data="{ sidebarOpen: false}">
         <!-- Mobile Menu Button (Top Left) -->
         <button @click="sidebarOpen = !sidebarOpen"
             x-show="!sidebarOpen"
@@ -104,57 +103,58 @@
                 </div>
             </div>
         </div>
-    
-        <!-- Mobile User Dropdown (Top Right) -->
-        <div x-data="{ open: false }" class="relative lg:hidden z-50">
-            <!-- Mobile User Icon (Initials) -->
-            <button @click="open = !open"
-                class="fixed top-2 right-2 flex items-center gap-2 px-1 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+
+<!-- Mobile User Dropdown (Top Right) -->
+<div x-data="{ userMenuOpen: false }" class="lg:hidden z-50">
+    <!-- Mobile User Icon (Initials) -->
+    <button @click="console.log('Button clicked'); userMenuOpen = !userMenuOpen"
+        class="fixed top-2 right-2 flex items-center gap-2 px-1 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
+            <span class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                {{ auth()->user()->initials() }}
+            </span>
+        </span>
+    </button>
+
+    <!-- Mobile Dropdown Menu -->
+    <div x-show="userMenuOpen" @click.away="userMenuOpen = false"
+    style="display: block !important;"
+    class="absolute right-0 mt-2 w-[220px] bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50">
+        <div class="px-4 py-3 text-sm font-normal">
+            <div class="flex items-center gap-2">
                 <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                     <span class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
                         {{ auth()->user()->initials() }}
                     </span>
                 </span>
-            </button>
-    
-            <!-- Mobile Dropdown Menu -->
-            <div x-show="open" @click.away="open = false"
-                class="absolute right-0 mt-2 w-[220px] bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50">
-                <div class="px-4 py-3 text-sm font-normal">
-                    <div class="flex items-center gap-2">
-                        <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                            <span class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                {{ auth()->user()->initials() }}
-                            </span>
-                        </span>
-                        <div class="grid flex-1 text-left text-sm leading-tight">
-                            <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                            <span class="truncate text-xs text-gray-500 dark:text-gray-400">{{ auth()->user()->email }}</span>
-                        </div>
-                    </div>
+                <div class="grid flex-1 text-left text-sm leading-tight">
+                    <span class="truncate font-semibold dark:text-white/80">{{ auth()->user()->name }}</span>
+                    <span class="truncate text-xs text-gray-500 dark:text-gray-400">{{ auth()->user()->email }}</span>
                 </div>
-    
-                <div class="border-t border-gray-200 dark:border-gray-700"></div>
-    
-                <!-- Settings Link -->
-                <a href="/settings/profile" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <x-icon name="cog" class="w-5 h-5" />
-                    {{ __('Settings') }}
-                </a>
-    
-                <div class="border-t border-gray-200 dark:border-gray-700"></div>
-    
-                <!-- Logout Form -->
-                <form method="POST" action="{{ route('logout') }}" class="w-full">
-                    @csrf
-                    <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-icon name="arrow-right-start-on-rectangle" class="w-5 h-5" />
-                        {{ __('Log Out') }}
-                    </button>
-                </form>
             </div>
         </div>
-    
+
+        <div class="border-t border-gray-200 dark:border-gray-700"></div>
+
+        <!-- Settings Link -->
+        <a href="/settings/profile" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <x-icon name="cog" class="w-5 h-5" />
+            {{ __('Settings') }}
+        </a>
+
+        <div class="border-t border-gray-200 dark:border-gray-700"></div>
+
+        <!-- Logout Form -->
+        <form method="POST" action="{{ route('logout') }}" class="w-full">
+            @csrf
+            <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <x-icon name="arrow-right-start-on-rectangle" class="w-5 h-5" />
+                {{ __('Log Out') }}
+            </button>
+        </form>
+    </div>
+</div>
+            
         <!-- Main Content -->
         <div class="flex-1">
             {{ $slot }}
