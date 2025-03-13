@@ -1,3 +1,3 @@
-<nav {{ $attributes->merge(['class' => 'flex flex-col overflow-visible min-h-auto']) }}>
-    {{ $slot }}
+<nav {{ $attributes->merge(['class' => 'flex overflow-visible min-h-auto']) }}>
+    {{ $slot->withAttributes(['variant' => $attributes->get('variant')]) }}
 </nav>

@@ -26,7 +26,7 @@
                     <x-app-logo />
                 </a>
         
-                <x-navlist variant="outline" class="mt-4">
+                <x-navlist class="mt-4 flex-col">
                     <x-navlink icon="home" href="{{ route('dashboard') }}" :current="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-navlink>
@@ -38,7 +38,7 @@
         
             <!-- Bottom Section -->
             <div>
-                <x-navlist variant="outline">
+                <x-navlist class="flex-col">
                     <x-navlink icon="folder" :href="'https://github.com/laravel/livewire-starter-kit'" target="_blank">
                         {{ __('Repository') }}
                     </x-navlink>
