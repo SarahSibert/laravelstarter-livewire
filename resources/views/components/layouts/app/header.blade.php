@@ -4,7 +4,6 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800" x-data="{ sidebarOpen: false }">
-    
         <!-- Sidebar (Mobile) -->
         <div x-show="sidebarOpen"
             x-transition:enter="transition ease-out duration-300"
@@ -52,8 +51,7 @@
     
         <!-- Header -->    
         <div class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-            <div class="max-w-7xl mx-auto flex items-center px-10 justify-end lg:justify-between">
-                
+            <div class="max-w-7xl mx-auto flex items-center px-10 justify-end lg:justify-between"> 
                 <!-- Mobile Menu Button (Top Left) -->
                 <button @click="sidebarOpen = !sidebarOpen"
                     x-show="!sidebarOpen"
